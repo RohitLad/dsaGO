@@ -30,7 +30,10 @@ func (list *DoubleLinkedList) Append(elem interface{}) {
 
 func (list *DoubleLinkedList) Pretend(elem interface{}) {
 	newNode := dnode{Data: elem, next: list.head}
-	list.head.prev = &newNode
+	if list.length > 0 {
+		list.head.prev = &newNode
+	}
+
 	list.head = &newNode
 	list.length++
 }
