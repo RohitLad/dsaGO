@@ -39,12 +39,10 @@ func (list *LinkedList) Insert(index int, elem interface{}) {
 		list.Append(elem)
 	} else {
 		newNode := node{Data: elem}
-		currNode := list.head
-		for i := 1; i <= index-1; i++ {
-			currNode = currNode.next
-		}
-		newNode.next = currNode.next
-		currNode.next = &newNode
+		prevNode := list.goTo(index - 1)
+		nextNode := prevNode.next
+		prevNode.next = &newNode
+		newNode.next = nextNode
 		list.length++
 	}
 
@@ -54,18 +52,26 @@ func (list *LinkedList) Remove(index int) {
 	if index == 0 {
 		list.head = list.head.next
 	} else {
-		currNode := list.head
-		for i := 1; i <= index-1; i++ {
-			currNode = currNode.next
-		}
-		removeNode := currNode.next
-		next2removeNode := removeNode.next
-		currNode.next = next2removeNode
+		prevNode := list.goTo(index - 1)
+		node2Remove := prevNode.next
+
 		if index == list.length-1 {
-			list.tail = currNode
+			list.tail = prevNode
+			prevNode.next = nil
+		} else {
+			nextNode := node2Remove.next
+			prevNode.next = nextNode
 		}
 	}
 	list.length--
+}
+
+func (list LinkedList) goTo(index int) *node {
+	currNode := list.head
+	for i := 1; i <= index; i++ {
+		currNode = currNode.next
+	}
+	return currNode
 }
 
 func (list LinkedList) Size() int {
