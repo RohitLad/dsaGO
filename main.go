@@ -6,10 +6,22 @@ import (
 )
 
 func main() {
-	testStack()
+	testQueue()
+	//testStack()
 	//testHashTable()
 	//testLinkedList()
 	//testDoubleLinkedList()
+}
+
+func testQueue() {
+	queue := ds.Queue{}
+	queue.Enqueue(55)
+	queue.Enqueue(65.2)
+	fmt.Println("First element: ", queue.Peek())
+	queue.Enqueue("test")
+	queue.Display()
+	fmt.Println("Removed element: ", queue.Dequeue())
+	queue.Display()
 }
 
 func testStack() {
