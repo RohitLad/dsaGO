@@ -6,9 +6,21 @@ import (
 )
 
 func main() {
-	testHashTable()
+	testStack()
+	//testHashTable()
 	//testLinkedList()
 	//testDoubleLinkedList()
+}
+
+func testStack() {
+	stack := ds.Stack{}
+	stack.Push(55)
+	stack.Push(65.2)
+	fmt.Println("Top element: ", stack.Peek())
+	stack.Push("test")
+	stack.Display()
+	fmt.Println("Popped element: ", stack.Pop())
+	stack.Display()
 }
 
 func testHashTable() {
