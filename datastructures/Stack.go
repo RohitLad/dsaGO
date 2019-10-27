@@ -1,7 +1,7 @@
 package datastructures
 
 type Stack struct {
-	data DoubleLinkedList
+	data LinkedList
 }
 
 func (st *Stack) Push(elem interface{}) {
