@@ -65,6 +65,20 @@ func (ht *HashTable) Remove(key string) {
 	}
 }
 
+func (ht *HashTable) Keys() []string {
+	keys := []string{}
+	for i := 0; i < hashtablesize; i++ {
+		if ht.data[i] != nil {
+			currNode := ht.data[i]
+			for currNode != nil {
+				keys = append(keys, currNode.key)
+				currNode = currNode.next
+			}
+		}
+	}
+	return keys
+}
+
 func (ht *HashTable) goTo(key string) (*hnode, *hnode, uint8) {
 	ind := ht.generateHash(key)
 	currNode := ht.data[ind]
