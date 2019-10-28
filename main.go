@@ -6,11 +6,21 @@ import (
 )
 
 func main() {
-	testQueue()
+	testBinaryTree()
+	//testQueue()
 	//testStack()
 	//testHashTable()
 	//testLinkedList()
 	//testDoubleLinkedList()
+}
+
+func testBinaryTree() {
+	bt := ds.BinaryTree{}
+	bt.Insert(50)
+	bt.Insert("abc")
+	fmt.Println(bt)
+	bt.Insert(66)
+
 }
 
 func testQueue() {
