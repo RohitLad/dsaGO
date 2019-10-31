@@ -1,17 +1,51 @@
 package main
 
 import (
+	srch "dsaGO/algorithms/search"
+	sort "dsaGO/algorithms/sort"
 	ds "dsaGO/datastructures"
 	"fmt"
 )
 
 func main() {
-	testBinaryTree()
+	testMergeSort()
+	//testInsertionSort()
+	//testBubbleSort()
+	//testLinearSearch()
+	//testBinaryTree()
 	//testQueue()
 	//testStack()
 	//testHashTable()
 	//testLinkedList()
 	//testDoubleLinkedList()
+}
+
+func testMergeSort() {
+	//max := 1000
+	//min := 0
+	//slice := make([]int, rand.Intn(max))
+	slice := []int{5, 7, 8, 10, 4, 2, 3}
+	sort.MergeSort(slice)
+	fmt.Println(slice)
+}
+
+func testInsertionSort() {
+	slice := []int{5, 7, 8, 10, 4, 2, 3}
+	sort.InsertionSort(slice)
+	fmt.Println(slice)
+}
+
+func testBubbleSort() {
+	slice := []int{5, 7, 8, 10, 4, 2, 3}
+	sort.BubbleSort(slice)
+	fmt.Println(slice)
+}
+
+func testLinearSearch() {
+	num2Find := 8
+	slice := []int{5, 7, 8, 10, 4, 2, 3}
+	_, i := srch.LinearSearch(slice, num2Find)
+	fmt.Println(num2Find, " is present at index ", i, " of slice")
 }
 
 func testBinaryTree() {
@@ -65,7 +99,7 @@ func testHashTable() {
 	fmt.Println("Keys: ", table.Keys())
 }
 
-func testDoubleLinkedList() {
+func testDoubleLinkedList() ds.DoubleLinkedList {
 	list := ds.DoubleLinkedList{}
 	list.Append(55.0)
 	list.Append(88)
@@ -82,6 +116,7 @@ func testDoubleLinkedList() {
 	list.Display()
 	list.Reverse()
 	list.Display()
+	return list
 }
 
 func testLinkedList() {
