@@ -17,10 +17,13 @@ func main() {
 func testBinaryTree() {
 	bt := ds.BinaryTree{}
 	bt.Insert(50)
-	bt.Insert("abc")
-	fmt.Println(bt)
 	bt.Insert(66)
-
+	bt.Insert(22)
+	bt.Insert(55)
+	bt.Insert(1)
+	bt.Insert(23)
+	bt.Insert(68.2)
+	bt.Display()
 }
 
 func testQueue() {
@@ -59,7 +62,7 @@ func testHashTable() {
 	fmt.Println("Data at key: ", key2get, " is", table.Get(key2get))
 	table.Remove(key2get)
 	table.Display()
-
+	fmt.Println("Keys: ", table.Keys())
 }
 
 func testDoubleLinkedList() {

@@ -6,9 +6,10 @@ import (
 )
 
 type btnode struct {
-	left  *btnode
-	right *btnode
-	value interface{}
+	left   *btnode
+	right  *btnode
+	parent *btnode
+	value  interface{}
 }
 
 func (btn btnode) comparable() (float64, bool) {
@@ -57,6 +58,7 @@ func (bt *BinaryTree) Insert(elem interface{}) {
 				}
 				count++
 				if breakFlag {
+					currNode.parent = currNode
 					maxlevelsexceeded := count > bt.levels
 					if maxlevelsexceeded {
 						bt.levels = count
@@ -73,5 +75,29 @@ func (bt *BinaryTree) Insert(elem interface{}) {
 }
 
 func (bt BinaryTree) Display() {
+	/// credits: https://stackoverflow.com/questions/36802354/print-binary-tree-in-a-pretty-way-using-c
+	currNode := bt.root
+	if currNode != nil {
+		bt.printBT("", currNode, false)
+	} else {
+		fmt.Println("[]")
+	}
+	fmt.Println()
+}
 
+func (bt BinaryTree) printBT(prefix string, node *btnode, isLeft bool) {
+	if node != nil {
+		fmt.Printf("%v", prefix)
+		var addPrefix string
+		if isLeft {
+			fmt.Printf("├── ")
+			addPrefix = "│   "
+		} else {
+			fmt.Printf("└── ")
+			addPrefix = "    "
+		}
+		fmt.Println(node.value)
+		bt.printBT(prefix+addPrefix, node.left, true)
+		bt.printBT(prefix+addPrefix, node.right, false)
+	}
 }
