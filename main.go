@@ -5,7 +5,8 @@ import (
 )
 
 func main() {
-	search.TestBFS()
+	search.TestDFS()
+	//search.TestBFS()
 	//sort.TestQuickSort()
 	//sort.TestMergeSort()
 	//sort.TestInsertionSort()
