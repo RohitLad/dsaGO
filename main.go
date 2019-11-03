@@ -1,11 +1,12 @@
 package main
 
-import "dsaGO/algorithms/sort"
-
-//srch "dsaGO/algorithms/search"
+import (
+	"dsaGO/algorithms/search"
+)
 
 func main() {
-	sort.TestQuickSort()
+	search.TestBFS()
+	//sort.TestQuickSort()
 	//sort.TestMergeSort()
 	//sort.TestInsertionSort()
 	//sort.TestBubbleSort()
