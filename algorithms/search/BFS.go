@@ -5,9 +5,9 @@ import (
 	"fmt"
 )
 
-func BFS(tree ds.BinaryTree, elem interface{}) (interface{}, bool) {
+func BFS(tree ds.BinaryTree, elem interface{}) bool {
 	if tree.Root == nil {
-		return nil, false
+		return false
 	}
 	root := tree.Root()
 	searchQueue := ds.Queue{}
@@ -15,7 +15,7 @@ func BFS(tree ds.BinaryTree, elem interface{}) (interface{}, bool) {
 	for searchQueue.Size() != 0 {
 		currNode := searchQueue.Dequeue().(*ds.BTNode)
 		if currNode.Value() == elem {
-			return currNode.Value, true
+			return true
 		}
 		if currNode.Left() != nil {
 			searchQueue.Enqueue(currNode.Left())
@@ -24,7 +24,7 @@ func BFS(tree ds.BinaryTree, elem interface{}) (interface{}, bool) {
 			searchQueue.Enqueue(currNode.Right())
 		}
 	}
-	return nil, false
+	return false
 }
 
 func TestBFS() {
@@ -38,7 +38,7 @@ func TestBFS() {
 	bt.Insert(elem)
 	bt.Insert(68.2)
 	bt.Display()
-	_, ok := BFS(bt, elem)
+	ok := BFS(bt, elem)
 	if ok {
 		fmt.Println(elem, " exists in the BT")
 	} else {
