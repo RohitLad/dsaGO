@@ -3,19 +3,19 @@ package datastructures
 import "fmt"
 
 type DoubleLinkedList struct {
-	head   *dnode
-	tail   *dnode
+	head   *DNode
+	tail   *DNode
 	length int
 }
 
-type dnode struct {
+type DNode struct {
 	Data interface{}
-	next *dnode
-	prev *dnode
+	next *DNode
+	prev *DNode
 }
 
 func (list *DoubleLinkedList) Append(elem interface{}) {
-	newNode := dnode{Data: elem}
+	newNode := DNode{Data: elem}
 	if list.length == 0 {
 		list.head = &newNode
 		list.tail = &newNode
@@ -29,7 +29,7 @@ func (list *DoubleLinkedList) Append(elem interface{}) {
 }
 
 func (list *DoubleLinkedList) Pretend(elem interface{}) {
-	newNode := dnode{Data: elem, next: list.head}
+	newNode := DNode{Data: elem, next: list.head}
 	if list.length > 0 {
 		list.head.prev = &newNode
 	}
@@ -44,7 +44,7 @@ func (list *DoubleLinkedList) Insert(index int, elem interface{}) {
 	} else if index == list.length {
 		list.Append(elem)
 	} else {
-		newNode := dnode{Data: elem}
+		newNode := DNode{Data: elem}
 		prevNode := list.goTo(index - 1)
 		nextNode := prevNode.next
 		prevNode.next = &newNode
@@ -92,7 +92,7 @@ func (list *DoubleLinkedList) Reverse() {
 	}
 }
 
-func (list DoubleLinkedList) goTo(index int) *dnode {
+func (list DoubleLinkedList) goTo(index int) *DNode {
 	if index <= list.length/2 {
 		currNode := list.head
 		for i := 1; i <= index; i++ {
@@ -124,4 +124,23 @@ func (list DoubleLinkedList) Display() {
 
 	}
 	fmt.Println("   Size: ", list.Size())
+}
+
+func TestDoubleLinkedList() {
+	list := DoubleLinkedList{}
+	list.Append(55.0)
+	list.Append(88)
+	list.Append(68.125)
+	list.Pretend(458)
+	list.Display()
+	list.Reverse()
+	list.Display()
+	list.Insert(2, 33.5)
+	list.Display()
+	list.Remove(4)
+	list.Append(78)
+	list.Remove(1)
+	list.Display()
+	list.Reverse()
+	list.Display()
 }

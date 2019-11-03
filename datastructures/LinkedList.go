@@ -3,18 +3,18 @@ package datastructures
 import "fmt"
 
 type LinkedList struct {
-	head   *node
-	tail   *node
+	head   *LNode
+	tail   *LNode
 	length int
 }
 
-type node struct {
+type LNode struct {
 	Data interface{}
-	next *node
+	next *LNode
 }
 
 func (list *LinkedList) Append(elem interface{}) {
-	newNode := node{Data: elem}
+	newNode := LNode{Data: elem}
 	if list.length == 0 {
 		list.head = &newNode
 		list.tail = list.head
@@ -27,7 +27,7 @@ func (list *LinkedList) Append(elem interface{}) {
 }
 
 func (list *LinkedList) Pretend(elem interface{}) {
-	newNode := node{Data: elem, next: list.head}
+	newNode := LNode{Data: elem, next: list.head}
 	list.head = &newNode
 	list.length++
 }
@@ -38,7 +38,7 @@ func (list *LinkedList) Insert(index int, elem interface{}) {
 	} else if index == list.length {
 		list.Append(elem)
 	} else {
-		newNode := node{Data: elem}
+		newNode := LNode{Data: elem}
 		prevNode := list.goTo(index - 1)
 		nextNode := prevNode.next
 		prevNode.next = &newNode
@@ -66,7 +66,7 @@ func (list *LinkedList) Remove(index int) {
 	list.length--
 }
 
-func (list LinkedList) goTo(index int) *node {
+func (list LinkedList) goTo(index int) *LNode {
 	currNode := list.head
 	for i := 1; i <= index; i++ {
 		currNode = currNode.next
@@ -91,4 +91,19 @@ func (list LinkedList) Display() {
 
 	}
 	fmt.Println("   Size: ", list.Size())
+}
+
+func TestLinkedList() {
+	list := LinkedList{}
+	list.Append(55.0)
+	list.Append(88)
+	list.Append(68.125)
+	list.Pretend(458)
+	list.Display()
+	list.Insert(2, 33.5)
+	list.Display()
+	list.Remove(4)
+	list.Append(78)
+	list.Remove(1)
+	list.Display()
 }

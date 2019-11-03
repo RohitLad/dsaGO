@@ -7,14 +7,14 @@ import (
 
 const hashtablesize int = 5
 
-type hnode struct {
+type HNode struct {
 	Data interface{}
 	key  string
-	next *hnode
+	next *HNode
 }
 
 type HashTable struct {
-	data [hashtablesize]*hnode
+	data [hashtablesize]*HNode
 }
 
 func (ht HashTable) generateHash(key string) uint8 {
@@ -26,7 +26,7 @@ func (ht HashTable) generateHash(key string) uint8 {
 func (ht *HashTable) Set(key string, elem interface{}) {
 	ind := ht.generateHash(key)
 	if ht.data[ind] == nil {
-		newNode := hnode{Data: elem, key: key}
+		newNode := HNode{Data: elem, key: key}
 		ht.data[ind] = &newNode
 	} else {
 		currNode := ht.data[ind]
@@ -38,7 +38,7 @@ func (ht *HashTable) Set(key string, elem interface{}) {
 				currNode = currNode.next
 			}
 		}
-		newNode := hnode{Data: elem, key: key}
+		newNode := HNode{Data: elem, key: key}
 		currNode.next = &newNode
 	}
 
@@ -79,10 +79,10 @@ func (ht *HashTable) Keys() []string {
 	return keys
 }
 
-func (ht *HashTable) goTo(key string) (*hnode, *hnode, uint8) {
+func (ht *HashTable) goTo(key string) (*HNode, *HNode, uint8) {
 	ind := ht.generateHash(key)
 	currNode := ht.data[ind]
-	prevNode := &hnode{}
+	prevNode := &HNode{}
 	for currNode != nil {
 		if currNode.key == key {
 			return currNode, prevNode, ind
@@ -104,4 +104,21 @@ func (ht HashTable) Display() {
 		}
 		fmt.Printf("\n")
 	}
+}
+
+func TestHashTable() {
+	table := HashTable{}
+	table.Set("Rohit", 25)
+	table.Set("Rohito", 250)
+	table.Set("A", 26.36)
+	table.Set("H", 2645)
+	table.Set("G", "chc")
+	table.Set("E", 25.05)
+	table.Set("Rohitoo", "test")
+	table.Display()
+	key2get := "Rohit"
+	fmt.Println("Data at key: ", key2get, " is", table.Get(key2get))
+	table.Remove(key2get)
+	table.Display()
+	fmt.Println("Keys: ", table.Keys())
 }

@@ -5,14 +5,26 @@ import (
 	"fmt"
 )
 
-type btnode struct {
-	left   *btnode
-	right  *btnode
-	parent *btnode
+type BTNode struct {
+	left   *BTNode
+	right  *BTNode
+	parent *BTNode
 	value  interface{}
 }
 
-func (btn btnode) comparable() (float64, bool) {
+func (node BTNode) Value() interface{} {
+	return node.value
+}
+
+func (node BTNode) Left() *BTNode {
+	return node.left
+}
+
+func (node BTNode) Right() *BTNode {
+	return node.right
+}
+
+func (btn BTNode) comparable() (float64, bool) {
 	flt, ok := btn.value.(float64)
 	if ok {
 		return flt, ok
@@ -25,12 +37,16 @@ func (btn btnode) comparable() (float64, bool) {
 }
 
 type BinaryTree struct {
-	root   *btnode
+	root   *BTNode
 	levels int
 }
 
+func (bt BinaryTree) Root() *BTNode {
+	return bt.root
+}
+
 func (bt *BinaryTree) Insert(elem interface{}) {
-	newNode := btnode{value: elem}
+	newNode := BTNode{value: elem}
 
 	if bt.root == nil {
 		bt.root = &newNode
@@ -85,7 +101,7 @@ func (bt BinaryTree) Display() {
 	fmt.Println()
 }
 
-func (bt BinaryTree) printBT(prefix string, node *btnode, isLeft bool) {
+func (bt BinaryTree) printBT(prefix string, node *BTNode, isLeft bool) {
 	if node != nil {
 		fmt.Printf("%v", prefix)
 		var addPrefix string
@@ -100,4 +116,17 @@ func (bt BinaryTree) printBT(prefix string, node *btnode, isLeft bool) {
 		bt.printBT(prefix+addPrefix, node.left, true)
 		bt.printBT(prefix+addPrefix, node.right, false)
 	}
+}
+
+func TestBinaryTree() {
+	bt := BinaryTree{}
+	bt.Insert(50)
+	bt.Insert(66)
+	bt.Insert(22)
+	bt.Insert(55)
+	bt.Insert(1)
+	elem := 23
+	bt.Insert(elem)
+	bt.Insert(68.2)
+	bt.Display()
 }

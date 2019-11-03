@@ -1,5 +1,7 @@
 package sort
 
+import "fmt"
+
 func InsertionSort(list []int) {
 
 	for i, v := range list {
@@ -13,4 +15,10 @@ func InsertionSort(list []int) {
 		}
 		list[i] = v
 	}
+}
+
+func TestInsertionSort() {
+	slice := []int{5, 7, 8, 10, 4, 2, 3}
+	InsertionSort(slice)
+	fmt.Println(slice)
 }

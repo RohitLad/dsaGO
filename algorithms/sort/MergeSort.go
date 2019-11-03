@@ -1,5 +1,7 @@
 package sort
 
+import "fmt"
+
 func mDivide(array []int, lIndex int, rIndex int) []int {
 	mid := (lIndex + rIndex) / 2
 	diff := rIndex - lIndex
@@ -36,4 +38,10 @@ func MergeSort(list []int) {
 	for i, _ := range list {
 		list[i] = sorted[i]
 	}
+}
+
+func TestMergeSort() {
+	slice := []int{5, 7, 8, 10, 4, 2, 3}
+	MergeSort(slice)
+	fmt.Println(slice)
 }
